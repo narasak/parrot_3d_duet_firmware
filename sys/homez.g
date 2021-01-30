@@ -3,6 +3,11 @@
 
 M98 P"current-sense-homing.g"                              ; Ensure the current and sensitivity is set for homing routines.
 
+; =========================================================================================================
+; NEOPIXEL RGB
+; =========================================================================================================
+M98 P"0:/macros/NEOPIXEL/yellow.g"
+
 G91                                                        ; Set relative positioning.
 G1 H0 Z3 F6000                                             ; Lift Z axis 3mm.
 G90                                                        ; Set absolute positioning.
@@ -18,3 +23,8 @@ G30                                                        ; Perform Z probing.
 G1 H0 Z5 F400                                              ; Lift Z axis to the 5mm position.
 
 M558 F200 A1                                               ; Set normal z-probe speed.  
+
+; =========================================================================================================
+; NEOPIXEL RGB
+; =========================================================================================================
+M98 P"0:/macros/NEOPIXEL/white.g"

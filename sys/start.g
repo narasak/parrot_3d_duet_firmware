@@ -17,7 +17,7 @@ M106 S0                                                    ; Turn part cooling b
 M703                                                       ; Execute loaded filament's config.g.
 G28                                                        ; Home all.
 
-G1 Z5 X100 Y100                                            ; [PINDA] Place nozzle center of the bed, 5mm up.
+G1 Z5 X104 Y98                                             ; [PINDA] Place nozzle center of the bed, 5mm up.
 
 M116 S5                                                    ; Wait for all temperatures.
 
@@ -32,9 +32,14 @@ M400                                                       ; Finish all moves, c
 G90                                                        ; Absolute Positioning.
 M83                                                        ; Extruder relative mode.
 M98 P"current-sense-normal.g"                       	   ; Ensure that motor currents and sense are set for printing. 
-G1 X0 Y0 F800                                              ; Final position before slicer's temp is reached and primeline is printed.
+G1 X0 Y0 F2000                                             ; Final position before slicer's temp is reached and primeline is printed.
 G1 Z2 F300                                                 ; Final position before slicer's temp is reached and primeline is printed.
  
+; =========================================================================================================
+; NEOPIXEL RGB
+; =========================================================================================================
+M98 P"0:/macros/NEOPIXEL/white.g"
+
 ; The primeline macro is executed by the slicer gcode to enable direct printing.
 ; of the primeline at the objects temp and to immediately print the object.
 ; following primeline completion. 

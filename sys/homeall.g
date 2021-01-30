@@ -7,6 +7,11 @@ G91                                                        ; Set relative positi
 G1 Z3 F800 H2                                              ; Lift the Z axis 3mm.
 
 ; =========================================================================================================
+; NEOPIXEL RGB
+; =========================================================================================================
+M98 P"0:/macros/NEOPIXEL/yellow.g"
+
+; =========================================================================================================
 ; Home X Axis
 ; =========================================================================================================
 G1 H0 X5 F1000                                             ; Move slowly away. 
@@ -27,7 +32,7 @@ G1 H1 Y-215 F3000                                          ; Move quickly to the
 ; =========================================================================================================
 G1 H2 Z2 F2600                                             ; Raise the Z axis 2mm to ensure it is above the Z probe trigger height.
 G90                                                        ; Set absolute positioning mode.
-G1 X104 Y98 F6000                                         ; Go to the center of the bed for probe point.
+G1 X104 Y98 F6000                                          ; Go to the center of the bed for probe point.
 
 M558 F1000 A1                                              ; Set the Z-probe to fast for the first pass.  
 G30                                                        ; Perform Z probing.
@@ -38,3 +43,8 @@ G30                                                        ; Perform Z probing.
 G1 H0 Z5 F400                                              ; Lift the Z axis to the 5mm position.
 
 M558 F200 A1                                               ; Set the Z-probe to normal speed.  
+
+; =========================================================================================================
+; NEOPIXEL RGB
+; =========================================================================================================
+M98 P"0:/macros/NEOPIXEL/white.g"

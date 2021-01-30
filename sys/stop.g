@@ -26,7 +26,7 @@ G1 Z2 F400                                                 	; Move Z axis up 3mm
 
 G90                                                        	; Set to Absolute Positioning.
 
-G1 X220 Y205 Z205 F400                                     	; Place nozzle to the right side, build plate to front, Z at top.
+G1 X220 Y205 Z205 F2000                                     ; Place nozzle to the right side, build plate to front, Z at top.
 M400                                                       	; Finish all moves, clear the buffer.
 M107                                                       	; Turn off the part cooling fan.
 M18 YXE                                                    	; Unlock the X, Y, and E axis.
@@ -50,3 +50,8 @@ G4 P151
 M300 P350 S3700
 G4 P351
 M400                                                       ; Finish all moves, clear the buffer.
+
+; =========================================================================================================
+; NEOPIXEL RGB
+; =========================================================================================================
+M98 P"0:/macros/NEOPIXEL/green.g"
