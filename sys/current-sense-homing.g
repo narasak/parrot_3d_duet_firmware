@@ -1,8 +1,19 @@
-; 0:/sys/current-sense-homing.g
-; Set the current and sensitivity for homing, non-printing, routines
+; #####################################################################
+; #
+; # Set the current and sensitivity for homing, non-printing routines
+; #
+; #####################################################################
 
-M915 P0.0 S1 R0 F0 H400		    		; X sensitivity 1, don’t take action, don’t filter, 400steps/sec
-M915 P0.1 S1 R0 F0 H400		    		; Y sensitivity 1, don’t take action, don’t filter, 400steps/sec
-;M915 P0.2 S0 R0 F0 H200					; Z1 sensitivity 0, don’t take action, don’t filter, 200steps/sec
-;M915 P0.3 S0 R0 F0 H200					; Z2 sensitivity 0, don’t take action, don’t filter, 200steps/sec
-M913 X55 Y55 Z50                  		; Set the X, Y, and Z drivers current percentage for non-print moves, per config.g.
+M569 P0.1 V10            ; reduce V to ensure stealthChop is enabled for x
+M569 P0.2 V10            ; reduce V to ensure stealthChop is enabled for y
+M913 X30 Y30             ; drop motor current to 30%
+G4 P100                  ; wait 100ms
+
+; ######
+; # Tune drivers
+; ###############
+G91                      ; relative positioning
+G1 H2 X0.2 Y0.2 F3000    ; power up motors to ensure they are not stalled
+G4 P100                  ; wait 100ms
+M400                     ; wait for current moves to finish
+G1 H2 X-0.2 Y-0.2 F3000  ; go back to the original position

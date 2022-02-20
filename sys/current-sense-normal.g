@@ -1,6 +1,10 @@
-; 0:/sys/current-sense-normal.g
-; Set the current and sensitivity for normal routines
+; #####################################################################
+; #
+; # Set the current and sensitivity for normal routines
+; #
+; #####################################################################
 
-M913 X100 Y100 Z100      			; Set the X, Y, and Z drivers to 100% of their normal current per config.g.
-M915 P0.0 S50 R2 F1 H200		    ; X sensitivity 0, tuned stall detection and pause the print automatically when a stall is detected., filtered, 200steps/sec
-M915 P0.1 S50 R2 F1 H200		    ; Y sensitivity 1, tuned stall detection and pause the print automatically when a stall is detected., filtered, 200steps/sec
+M913 X100 Y100          ; return current to 100% for x and y
+M569 P0.1 V100          ; restore default V for x
+M569 P0.2 V100          ; restore default V for y
+G90                     ; absolute positioning

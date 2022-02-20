@@ -1,24 +1,44 @@
-; 0:/sys/homey.g
-; Home the Y axis
+; #####################################################################
+; #
+; # Home Y-Axis
+; #
+; #####################################################################
 
-M98 P"current-sense-homing.g"                              ; Ensure the current and sensitivity is set for homing routines.
+G91                                                    ; relative positioning
 
-; =========================================================================================================
-; NEOPIXEL RGB
-; =========================================================================================================
-M98 P"0:/macros/NEOPIXEL/yellow.g"
+; ######
+; # Set motor current to homing
+; ###############
+M98 P"current-sense-homing.g"                          ; ensure the current and sensitivity is set for homing routines.
 
-G91                                                        ; Set relative positioning.
-G1 Z3 F800 H2                                              ; Lift the Z axis 3mm.  
+G1 H2 Y0.5 F10000                                      ; energise motor to ensure it's not stalled
+M400                                                   ; wait for current moves to finish
+G4 P200                                                ; wait 200ms
 
-G1 H0 Y5 F1000                                             ; Move slowly away. 
-G1 H1 Y-215 F3000                                          ; Move quickly to the Y endstop. 
-G1 H0 Y5 F1000                                             ; Move slowly away. 
-G1 H1 Y-215 F3000                                          ; Move quickly to the Y endstop, second check.
+; ######
+; # Move Z-Axis
+; ###############
+G1 H2 Z5 F6000                                         ; lift z relative to current position
+M400                                                   ; wait for current moves to finish
 
-G1 Z-3 F800 H2                                             ; Place Z back to the starting position.
+; ######
+; # Start Homing Y-Axis
+; ###############
+G1 H1 Y5 F1000                                         ; move slowly away
+G1 H1 Y-225 F2400                                      ; move quickly to y axis endstop and stop there (first pass)
+G1 H2 Y5 F1000                                         ; go back a few mm
+G1 H1 Y-10 F2400                                       ; move slowly to y axis endstop once more (second pass)
+G1 H2 Z-5 F6000                                        ; lower z again
 
-; =========================================================================================================
-; NEOPIXEL RGB
-; =========================================================================================================
-M98 P"0:/macros/NEOPIXEL/white.g"
+; ######
+; # Waiting
+; ###############
+M400                                                   ; wait for current moves to finish
+G4 P200                                                ; wait 200ms
+
+G90                                                    ; absolute positioning
+
+; ######
+; # Set motor current to normal
+; ###############
+M98 P"current-sense-normal.g"                          ; ensure the current and sensitivity is set for normal routines.

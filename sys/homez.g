@@ -1,30 +1,71 @@
-; 0:/sys/homez.g
-; Home the Z axis
+; #####################################################################
+; #
+; # Home xyz Axis
+; #
+; # for Parrot 3D BL-Touch
+; #
+; #####################################################################
 
-M98 P"current-sense-homing.g"                              ; Ensure the current and sensitivity is set for homing routines.
+G91                                                    ; relative positioning
 
-; =========================================================================================================
-; NEOPIXEL RGB
-; =========================================================================================================
-M98 P"0:/macros/NEOPIXEL/yellow.g"
+; ######
+; # Change motor current for homing
+; ###############
+M98 P"current-sense-homing.g"                          ; ensure the current and sensitivity is set for homing routines.
 
-G91                                                        ; Set relative positioning.
-G1 H0 Z3 F6000                                             ; Lift Z axis 3mm.
-G90                                                        ; Set absolute positioning.
+G1 H2 X0.5 F10000                                      ; energise motors to ensure they are not stalled
+M400                                                   ; wait for current moves to finish
+G4 P200                                                ; wait 200ms
 
-G1 X104 Y98 F6000                                         ; Go to the center of the bed for probe point.
+; ######
+; # Move Z-Axis
+; ###############
+G1 H2 Z5 F6000                                         ; lift Z relative to current position
+M400                                                   ; wait for current moves to finish
 
-M558 F1000 A1                                              ; Set probing speed to fast for the first pass.  
-G30                                                        ; Perform Z probing.
-G1 H0 Z5 F400                                              ; Lift Z axis to the 5mm position.
+; ######
+; # Home X-Axis
+; ###############
+G1 H1 X5 F1000                                         ; move slowly away
+G1 H1 X-260 F2200                                      ; move quickly to x axis endstop and stop there (first pass)
+G1 H2 X5 F1000                                         ; go back a few mm
+G1 H1 X-10 F2200                                       ; move slowly to x axis endstop once more (second pass)
 
-M558 F50 A5 S-1                                            ; Set probing speed to slow for second pass, take 5 probes and yield the average.
-G30                                                        ; Perform Z probing.
-G1 H0 Z5 F400                                              ; Lift Z axis to the 5mm position.
+; ######
+; # Home Y-Axis
+; ###############
+M400                                                   ; wait for current moves to finish
+G1 H2 Y0.5 F10000                                      ; energise motors to ensure they are not stalled
+M400                                                   ; wait for current moves to finish
+G1 H1 Y5 F1000                                         ; move slowly away
+G1 H1 Y-260 F2400                                      ; move quickly to x axis endstop and stop there (first pass)
+G1 H2 Y5 F1000                                         ; go back a few mm
+G1 H1 Y-10 F2400                                       ; move slowly to x axis endstop once more (second pass)
 
-M558 F200 A1                                               ; Set normal z-probe speed.  
+; ######
+; # Waiting
+; ###############
+M400                                                   ; wait for current moves to finish
+M913 X100 Y100                                         ; return x & y motor
+G4 P200                                                ; wait 200ms
 
-; =========================================================================================================
-; NEOPIXEL RGB
-; =========================================================================================================
-M98 P"0:/macros/NEOPIXEL/white.g"
+G90                                                    ; absolute positioning
+
+; ######
+; # Home Z-Axis
+; ###############
+G90                                                    ; absolute positioning
+M280 P0 S160                                           ; BLTouch, alarm release
+G4 P100                                                ; BLTouch, delay for the release command
+G1 X148.5 Y142.5 F3600                                 ; go to center of the bed
+G30                                                    ; home z by probing the bed
+G1 Z1.15 F100                                          ; move z to origin and 1.15mm above bed
+G90                                                    ; absolute positioning
+M400                                                   ; wait for current moves to finish
+
+G90                                                    ; absolute positioning
+
+; ######
+; # Change motor current back to normal
+; ###############
+M98 P"current-sense-normal.g"                          ; ensure the current and sensitivity is set for normal routines.

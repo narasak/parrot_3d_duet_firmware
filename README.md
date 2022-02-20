@@ -9,7 +9,7 @@
 * Duet 3 Mainboard 6HC with SBC Setup
 
 ## Firmware
-* RepRap 3.2 for Duet 3 Mainboard
+* RepRap 3.3 for Duet 3 Mainboard
 
 ## New Features
 * Now support NeoPixel LED upto 30 LED
@@ -18,14 +18,14 @@
 * X-axis: Moon's 0.9° motor (MS17HA6P4200)
 * Y-axis: Moon's 0.9° motor (MS17HA6P4200)
 * Z-axis: LDO 1.8° motor (LDO-42STH34-1004L321EC TEFLON COATED LEADSCREW)
-* E-axis: Moon's 0.9° motor (MS17HA4P4200)
-* Micro Stepping: 1/256 with Interpolation
+* E-axis: LGX Shortcut Mosquito
+* Micro Stepping: 1/256 without Interpolation
 
 ## Hotend
-* Slice Engineering Mosquito/Mosquito Magnum Hotend
+* LGX Shortcut Mosquito Hotend
 * Slice Engineering 50W 24V Heater Cartridge
-* E3D Temperature Thermistor
-* P.I.N.D.A. 2
+* Slice Engineering High Temperature Thermistor
+* BLTouch
 
 ## LCD Controller
 * No

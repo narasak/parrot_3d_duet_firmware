@@ -1,47 +1,41 @@
-; 0:/sys/start.g
-; Executed before each print - BEFORE ANY SLICER CODE IS RAN
-; This also loads the heightmap from the system's set filament type directory
-; (0:/filaments/XXXX/heightmap.csv), if the heightmap does not exist, it will
-; create one, and then save in the filament's directory. The HotMesh macro is
-; a better choice to generate the heightmap as it performs a heat stabilization
-; routine for ~5 minutes.
+; #####################################################################
+; #
+; # Start printing script
+; #
+; #####################################################################
 
-M122                                                       ; Clear diagnostic data to cleanly capture print evolution statistics. 
- 
-T0                                                         ; Ensure the tool is selected.
-M572 D0 S0.0                                               ; Clear pressure advance.
-M220 S100                                                  ; Set speed factor back to 100% in case it was changed.
-M221 S100                                                  ; Set extrusion factor back to 100% in case it was changed.
-M290 R0 S0                                                 ; Clear any baby-stepping.
-M106 S0                                                    ; Turn part cooling blower off if it is on.
-M703                                                       ; Execute loaded filament's config.g.
-G28                                                        ; Home all.
+T0                                                     	; ensure the tool is selected
 
-G1 Z5 X104 Y98                                             ; [PINDA] Place nozzle center of the bed, 5mm up.
+; ######
+; # Prepare for start
+; ###############
+M572 D0 S0.0                                           	; clear pressure advance.
+M220 S100                                              	; set speed factor back to 100% in case it was changed
+M221 S100                                              	; set extrusion factor back to 100% in case it was changed
+M290 R0 S0                                             	; clear any baby-stepping
+M106 S0                                                	; turn part cooling blower off if it is on
+M703                                                   	; execute loaded filament's config.g
 
-M116 S5                                                    ; Wait for all temperatures.
+; ######
+; # Gantry and mesh bed leveling
+; ###############
+;G32                                                    ; execute bed.g (level gantry)
+;G29 S1                                                 ; load bed mesh for the system's set filament type
 
-G32                                                        ; Level the gantry.
-G29 S1													   ; loading a previously saved height map
-;G29 S1 P[P{"0:/filaments/" ^ move.extruders[0].filament ^ "/heightmap.csv"}]
-;if result > 1
-;   G29
-;   G29 S3 P[P{"0:/filaments/" ^ move.extruders[0].filament ^ "/heightmap.csv"}]
+; ######
+; # Try to load mesh from current filament
+; # if it not exists perform mesh and save it to filaments directory
+; ###############
+G29 S1 P{"0:/filaments/" ^ move.extruders[0].filament ^ "/heightmap.csv"} ; Load bed mesh for the system's set filament type.
+if result > 1                                              ; If the file doesn't exist, perform mesh and save.
+   G29                                                     ; Perform mesh now.
+   G29 S3 P{"0:/filaments/" ^ move.extruders[0].filament ^ "/heightmap.csv"} ; Save heightmap.csv to filament type's directory.
 
-M400                                                       ; Finish all moves, clear the buffer.
-G90                                                        ; Absolute Positioning.
-M83                                                        ; Extruder relative mode.
-M98 P"current-sense-normal.g"                       	   ; Ensure that motor currents and sense are set for printing. 
-G1 X0 Y0 F2000                                             ; Final position before slicer's temp is reached and primeline is printed.
-G1 Z2 F300                                                 ; Final position before slicer's temp is reached and primeline is printed.
- 
-; =========================================================================================================
-; NEOPIXEL RGB
-; =========================================================================================================
-M98 P"0:/macros/NEOPIXEL/white.g"
+M400                                                   	; finish all moves, clear the buffer
+G90                                                    	; absolute Positioning
+M83                                                    	; extruder relative mode
 
-; The primeline macro is executed by the slicer gcode to enable direct printing.
-; of the primeline at the objects temp and to immediately print the object.
-; following primeline completion. 
- 
-; Slicer generated gcode takes it away from here.
+; ######
+; # Set motor current to normal before prnt
+; ###############
+M98 P"0:/sys/current-sense-normal.g"                   	; ensure that motor currents and sense are set for printing
