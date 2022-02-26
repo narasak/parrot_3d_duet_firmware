@@ -46,7 +46,7 @@ M84 S60                                            		; Set idle timeout
 ;M201 X1250.00 Y1250.00 Z200.00 E5000.00              	; set accelerations (mm/s^2)
 M201 X500.00 Y500.00 Z200.00 E500.00              		; set accelerations (mm/s^2)
 ;M203 X12000.00 Y12000.00 Z1200.00 E12000.00            ; set maximum speeds (mm/min) [XY-200mm/s, Z-20mm/s, E-200mm/s]
-M203 X9000.00 Y9000.00 Z1200.00 E3600.00               	; set maximum speeds (mm/min)
+M203 X9000.00 Y9000.00 Z600.00 E3600.00               	; set maximum speeds (mm/min)
 ;M204 P1250.00 T1250.00                                 ; set print and travel accelerations (mm(s^2)
 M204 P500.0 T500.0                                     	; set print and travel accelerations (mm(s^2)
 ;M566 X600.00 Y600.00 Z12.00 E150.00 P1                	; set maximum instantaneous speed changes (mm/min) [Jerk]
