@@ -4,8 +4,8 @@
 ; #
 ; #####################################################################
 
-M569 P0.1 V10            ; reduce V to ensure stealthChop is enabled for x
-M569 P0.2 V10            ; reduce V to ensure stealthChop is enabled for y
+;M569 P0.0 V10            ; reduce V to ensure stealthChop is enabled for x
+;M569 P0.1 V10            ; reduce V to ensure stealthChop is enabled for y
 M913 X30 Y30             ; drop motor current to 30%
 G4 P100                  ; wait 100ms
 

@@ -5,6 +5,8 @@
 ; #####################################################################
 
 T0                                                     	; ensure the tool is selected
+M280 P0 S160                                            ; BLTouch, alarm release
+G4 P100                                                 ; BLTouch, delay for the release command
 
 ; ######
 ; # Prepare for start
@@ -21,15 +23,17 @@ M703                                                   	; execute loaded filamen
 ; ###############
 ;G32                                                    ; execute bed.g (level gantry)
 ;G29 S1                                                 ; load bed mesh for the system's set filament type
+G28														; home all
+;G29                                                     ; Perform mesh now.
 
 ; ######
 ; # Try to load mesh from current filament
 ; # if it not exists perform mesh and save it to filaments directory
 ; ###############
-G29 S1 P{"0:/filaments/" ^ move.extruders[0].filament ^ "/heightmap.csv"} ; Load bed mesh for the system's set filament type.
-if result > 1                                              ; If the file doesn't exist, perform mesh and save.
-   G29                                                     ; Perform mesh now.
-   G29 S3 P{"0:/filaments/" ^ move.extruders[0].filament ^ "/heightmap.csv"} ; Save heightmap.csv to filament type's directory.
+;G29 S1 P{"0:/filaments/" ^ move.extruders[0].filament ^ "/heightmap.csv"} ; Load bed mesh for the system's set filament type.
+;if result > 1                                              ; If the file doesn't exist, perform mesh and save.
+;   G29                                                     ; Perform mesh now.
+;   G29 S3 P{"0:/filaments/" ^ move.extruders[0].filament ^ "/heightmap.csv"} ; Save heightmap.csv to filament type's directory.
 
 M400                                                   	; finish all moves, clear the buffer
 G90                                                    	; absolute Positioning

@@ -3,3 +3,6 @@
 ; # Config PID Tuning for PLA filament
 ; #
 ; #####################################################################
+; Heater model parameters
+M307 H0 R0.282 K0.272:0.000 D9.75 E1.35 S1.00 B0				; Head Bed 60C
+M307 H1 R2.474 K0.339:0.000 D4.54 E1.35 S1.00 B0 V23.7			; Extruder 215C

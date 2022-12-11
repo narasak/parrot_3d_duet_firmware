@@ -3,3 +3,6 @@
 ; # Config PID Tuning for PETG filament
 ; #
 ; #####################################################################
+; Heater model parameters
+M307 H0 R0.282 K0.272:0.000 D9.75 E1.35 S1.00 B0				; Head Bed 90C
+M307 H1 R2.450 K0.523:0.000 D7.34 E1.35 S1.00 B0 V23.7			; Extruder 240C

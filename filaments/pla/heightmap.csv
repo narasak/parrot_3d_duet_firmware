@@ -1,6 +1,0 @@
-RepRapFirmware height map file v2 generated at 2022-02-20 11:40
-xmin,xmax,ymin,ymax,radius,xspacing,yspacing,xnum,ynum
-10.00,220.00,1.00,150.00,-1.00,104.99,74.49,3,3
-  0.243, -0.029, -0.349
-  0.412,  0.013, -0.350
-  0.490,  0.039, -0.438

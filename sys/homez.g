@@ -46,7 +46,7 @@ G1 H1 Y-10 F2400                                       ; move slowly to x axis e
 ; # Waiting
 ; ###############
 M400                                                   ; wait for current moves to finish
-M913 X100 Y100                                         ; return x & y motor
+M913 X156 Y42.5                                        ; return x & y motor
 G4 P200                                                ; wait 200ms
 
 G90                                                    ; absolute positioning
@@ -57,7 +57,7 @@ G90                                                    ; absolute positioning
 G90                                                    ; absolute positioning
 M280 P0 S160                                           ; BLTouch, alarm release
 G4 P100                                                ; BLTouch, delay for the release command
-G1 X148.5 Y142.5 F3600                                 ; go to center of the bed
+G1 X156 Y150 F3600                                     ; go to center of the bed
 G30                                                    ; home z by probing the bed
 G1 Z1.15 F100                                          ; move z to origin and 1.15mm above bed
 G90                                                    ; absolute positioning

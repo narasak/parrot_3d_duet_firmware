@@ -17,8 +17,8 @@ if heat.heaters[1].current < 180                                       ; check e
          M291 P"Hotend too cold. Preheat extruder first!" S2           ; ask to preheat extruder
         M99
 ;
-if {move.axes[1].workplaceOffsets[1] == 1}                             ; if autoload is enabled
-    M98 P"0:/sys/functions/activate-run-out-sensor.g"
+;if {move.axes[1].workplaceOffsets[1] == 1}                             ; if autoload is enabled
+;    M98 P"0:/sys/functions/activate-run-out-sensor.g"
 ;
 M300 S500 P600                                                         ; beep
 M291 R"Insert filament." P"Press OK to start feeding filament..." S2   ; display new message

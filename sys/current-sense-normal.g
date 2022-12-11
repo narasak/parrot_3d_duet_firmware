@@ -4,7 +4,6 @@
 ; #
 ; #####################################################################
 
-M913 X100 Y100          ; return current to 100% for x and y
-M569 P0.1 V100          ; restore default V for x
-M569 P0.2 V100          ; restore default V for y
-G90                     ; absolute positioning
+M913 X100 Y100 Z100                                                    ; set the x, y, and z drivers to 100% of their normal current per config.g.
+M915 X S2 F0 H200 R0                                                   ; set the x axis sensitivity.
+M915 Y S2 F0 H200 R0                                                   ; set the y axis sensitivity.

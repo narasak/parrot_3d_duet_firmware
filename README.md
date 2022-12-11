@@ -1,7 +1,7 @@
 # Parrot 3D Printer Firmware for Duet 3 Mainboard 6HC
 ![Parrot 3D Logo](https://github.com/narasak/parrot_3d/blob/main/img/parrot_3d_logo.svg?raw=true)
 
-# ⚠️ This is pre-release ⚠️ 
+# Finally this is release version
 
 # Configuration For
 
@@ -18,13 +18,12 @@
 * X-axis: Moon's 0.9° motor (MS17HA6P4200)
 * Y-axis: Moon's 0.9° motor (MS17HA6P4200)
 * Z-axis: LDO 1.8° motor (LDO-42STH34-1004L321EC TEFLON COATED LEADSCREW)
-* E-axis: LGX Shortcut Mosquito
-* Micro Stepping: 1/256 without Interpolation
+* E-axis: LGX ARC Mosquito
 
 ## Hotend
-* LGX Shortcut Mosquito Hotend
+* LGX ARC Mosquito Printhead
 * Slice Engineering 50W 24V Heater Cartridge
-* Slice Engineering High Temperature Thermistor
+* Slice Engineering High Temperature Thermistor (300C)
 * BLTouch
 
 ## LCD Controller

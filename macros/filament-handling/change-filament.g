@@ -49,25 +49,25 @@ G1 E-95 F2500                                                             ; retr
 M400                                                                      ; finish all moves, clear the buffer.
 M292
 ;
-if {move.axes[0].workplaceOffsets[1] == 1}                                ; if filament sensor is enabled
-    if {move.axes[1].workplaceOffsets[1] == 1}                            ; if autoload is enabled
-        M98 P"0:/sys/functions/activate-run-out-sensor.g"                   ; update sensor status
-        while {sensors.filamentMonitors[0].status != "noFilament"}        ; check filament status
-            M291 P"Please pull out filament!" S2                          ; ask to pull out filament
-else
+;if {move.axes[0].workplaceOffsets[1] == 1}                                ; if filament sensor is enabled
+;    if {move.axes[1].workplaceOffsets[1] == 1}                            ; if autoload is enabled
+;        M98 P"0:/sys/functions/activate-run-out-sensor.g"                   ; update sensor status
+;        while {sensors.filamentMonitors[0].status != "noFilament"}        ; check filament status
+;            M291 P"Please pull out filament!" S2                          ; ask to pull out filament
+;else
     M291 P"Please pull out filament!" S2                                  ; ask to pull out filament
 ;
 M400                                                                      ; finish all moves, clear the buffer.
 ;
 M300 S500 P600                                                            ; beep
-if {move.axes[0].workplaceOffsets[1] == 1}                                ; if filament sensor is enabled
-    if {move.axes[1].workplaceOffsets[1] == 1}                            ; if autoload is enabled
-        M98 P"0:/sys/functions/activate-autoload.g"                       ; update sensor status
-        M291 P"Insert filament ... " S1                                   ; display new message
-        while {move.axes[2].workplaceOffsets[1] == 1}
-            M400
-        M292
-else
+;if {move.axes[0].workplaceOffsets[1] == 1}                                ; if filament sensor is enabled
+;    if {move.axes[1].workplaceOffsets[1] == 1}                            ; if autoload is enabled
+;        M98 P"0:/sys/functions/activate-autoload.g"                       ; update sensor status
+;        M291 P"Insert filament ... " S1                                   ; display new message
+;        while {move.axes[2].workplaceOffsets[1] == 1}
+;            M400
+;        M292
+;else
     M291 R"Insert filament." P"Press OK to start feeding filament..." S2  ; display new message
     M291 P"Feeding filament.... " S1                                      ; display new message
     G91                                                                   ; set to Relative Positioning
@@ -79,11 +79,11 @@ M400                                                                      ; fini
 if !{{move.axes[0].workplaceOffsets[1] == 1} && {move.axes[1].workplaceOffsets[1] == 1}}   ; only if autoload is enabled and sensor is active purging is done through trigger
     M98 P"0:/macros/filament-handling/purge-filament.g"               ; need to purge?
 ;
-M98 P"0:/sys/functions/filament-sensor-status.g"                           ; update sensor status
+;M98 P"0:/sys/functions/filament-sensor-status.g"                           ; update sensor status
 ;
-if state.status == "paused"                                               ; printer is currently paused from printing!
-    M291 P"Press OK to resume print." S2                                  ; display message
-    M24                                                                   ; resume printing
+i;f state.status == "paused"                                               ; printer is currently paused from printing!
+ ;   M291 P"Press OK to resume print." S2                                  ; display message
+ ;   M24                                                                   ; resume printing
 ;
 ; =========================================================================================================
 ;
